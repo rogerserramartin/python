@@ -3,7 +3,7 @@
 1. Tkinter es una libreria incluida en Python
 2. Crear entorno virtual: python3 -m venv /path/to/new/virtual/environment
 3. Instalar TODAS las librerías con el VENV activado, y por si acaso, hacer un cd al VENV antes de instalar
-4. Librerías: pandas, sklearn(modelos ML), tensorflow(redes neuronales), tkdesigner(crear ventanas sin necesidad de codigo), psycopg2(conexion Python con Postgres)
+4. Librerías: pandas, sklearn(modelos ML), tensorflow(redes neuronales), tkdesigner(crear ventanas sin necesidad de codigo), psycopg2(conexion Python con Postgres), pyinstaller(crear ejecutables)
 
 
 # Pasos desarrollo ventana Figma
