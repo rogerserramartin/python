@@ -21,9 +21,16 @@ python3 install -r requirements.txt
 4. Conectar con la BBDD de Postgres
 5. Hacer un for de la lista y hacer un insert a la BBDD PostgreSQL
 
+server: localhost
+port: 5432
+user: postgres
+password: amigous
+dbname: python_test
+table: cliente
+CREATE DATABASE python_test;
+\c python_test
+CREATE TABLE cliente (id_cliente int, nombre varchar(24), direccion varchar(56), telefono varchar(9));
+SELECT * FROM cliente;
+DELETE FROM cliente;
 
-import psycopg2 as pg
-import pandas.io.sql as psql
-connection = pg.connect("host=localhost dbname=kinder user=your_username password=your_password")
-dataframe = psql.read_sql('SELECT * FROM product_product', connection)
-product_category = psql.read_sql_query('select * from product_category', connection)
+# Proximo paso: recibir resultados de SQL en un DataFrame, esto abre la puerta a ML usando Sklearn
