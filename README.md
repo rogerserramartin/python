@@ -21,16 +21,16 @@ python3 install -r requirements.txt
 4. Conectar con la BBDD de Postgres
 5. Hacer un for de la lista y hacer un insert a la BBDD PostgreSQL
 
-server: localhost
-port: 5432
-user: postgres
-password: amigous
-dbname: python_test
-table: cliente
-CREATE DATABASE python_test;
-\c python_test
-CREATE TABLE cliente (id_cliente int, nombre varchar(24), direccion varchar(56), telefono varchar(9));
-SELECT * FROM cliente;
-DELETE FROM cliente;
+server: localhost <br />
+port: 5432 <br />
+user: postgres <br />
+password: amigous <br />
+dbname: python_test <br />
+table: cliente <br />
+CREATE DATABASE python_test; <br />
+\c python_test <br />
+CREATE TABLE cliente (id_cliente int, nombre varchar(24), direccion varchar(56), telefono varchar(9)); <br />
+SELECT * FROM cliente; <br />
+DELETE FROM cliente; <br />
 
-# Proximo paso: recibir resultados de SQL en un DataFrame, esto abre la puerta a ML usando Sklearn
+#### Proximo paso: recibir resultados de SQL en un DataFrame, esto abre la puerta a ML usando Sklearn
