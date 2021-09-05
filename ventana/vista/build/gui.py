@@ -54,7 +54,12 @@ button_1.place(
 # https://pythonspot.com/tk-file-dialogs/
 
 def seleccionar_fichero():
-    filedialog.askopenfilename()
+    ubicacion = filedialog.askopenfilename()
+    # Eliminamos texto, si lo hubiera
+    ubicacion_fichero.delete(0)
+    # Le metemos el texto nuevo
+    ubicacion_fichero.insert(0, ubicacion)
+    
 
 button_image_2 = PhotoImage(
     file=relative_to_assets("button_2.png"))
