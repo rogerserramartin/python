@@ -8,7 +8,13 @@ from pathlib import Path
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, filedialog
+import psycopg2 as pg
 
+ubicacion = ""
+
+registros = []
+
+registro = [0,"","",""]
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
@@ -34,6 +40,40 @@ canvas = Canvas(
     relief = "ridge"
 )
 
+
+
+def insertar_en_bbdd():
+    
+    try:
+        connection = pg.connect("host=localhost dbname=python_test user=postgres password=amigous")
+    except:
+        print("Unable to connect")
+        
+    with open(ubicacion) as fichero:
+        for linea in fichero:
+            registro[0] = int(linea[:5])
+            registro[1] = str(linea[5:29])
+            registro[2] = str(linea[29:85])
+            registro[3] = str(linea[85:94])
+            # tengo que declarar estas variables porque no me deja usar los indices de registro, por problemas de set
+            #! Investigar creacion de objetos de tipo cliente, DAO no existe en Python...
+            
+            id_cliente = registro[0]
+            nombre_cliente = registro[1]
+            direccion_cliente = registro[2]
+            telefono_cliente = registro[3]
+            
+            registros.append(registro)
+            
+            cursor = connection.cursor()
+            cursor.execute(f"INSERT INTO cliente (id_cliente, nombre, direccion, telefono) VALUES (%s, %s, %s, %s);", (id_cliente,nombre_cliente,direccion_cliente,telefono_cliente))
+            cursor.close()
+            connection.commit()
+    connection.close()
+    print("Incorporacion Completada")
+    print(registros)
+
+
 canvas.place(x = 0, y = 0)
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
@@ -41,7 +81,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=lambda: insertar_en_bbdd(),
     relief="flat"
 )
 
@@ -54,6 +94,8 @@ button_1.place(
 # https://pythonspot.com/tk-file-dialogs/
 
 def seleccionar_fichero():
+    # para modificar el valor de una global dentro de una funcion, se usa la keyword global dentro de la funcion
+    global ubicacion
     ubicacion = filedialog.askopenfilename()
     # Eliminamos texto, si lo hubiera
     ubicacion_fichero.delete(0)
